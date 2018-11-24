@@ -50,7 +50,7 @@ function setup(){
   for(var i = 0; i < chance; i++){
   	life.push(new helath(i * 20));
   }
-  var a = confirm(`1.Click "Ok" to play in Light mode\n2.click "Cancel" to play in dark mode `);
+  var a = confirm(`click/tap to jump\n 1.Click "Ok" to play in Light mode\n2.click "Cancel" to play in dark mode `);
   if(a==true){
   	theme.img = Background1;
   }
@@ -323,7 +323,7 @@ function restart(){
 
 function Enemy(){
  this.x = width;
- this.y = random(height/2-150,height/2+150);
+ this.y = random(height/2-50,height/2+50);
  this.w = 70;
  this.h = 70;
  this.dx = 8;
