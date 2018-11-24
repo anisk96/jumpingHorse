@@ -50,7 +50,7 @@ function setup(){
   for(var i = 0; i < chance; i++){
   	life.push(new helath(i * 20));
   }
-  var a = confirm(`click or tap to jump\n1.Click "Ok" to play in Light mode\n2.click "Cancel" to play in dark mode `);
+  var a = confirm(`Instruction:\nClick or tap to jump\n\n1.Click "Ok" to play in Light mode\n2.click "Cancel" to play in dark mode `);
   if(a==true){
   	theme.img = Background1;
   }
