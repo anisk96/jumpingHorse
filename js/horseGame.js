@@ -69,7 +69,7 @@ function draw(){
   if(frameCount % 10==0){
 	   clouds.push(new Clouds());
   }
-  else if(frameCount % 45==0){
+  else if(frameCount % 100==0){
 	   enemies.push(new Enemy());
   }
 
@@ -323,7 +323,7 @@ function restart(){
 
 function Enemy(){
  this.x = width;
- this.y = random(height/2-50,height/2+50);
+ this.y = random(height/2-80,height/2+80);
  this.w = 70;
  this.h = 70;
  this.dx = 8;
