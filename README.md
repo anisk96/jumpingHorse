@@ -1,2 +1,1 @@
-# jumpingHorse
-just a lame jumping horse game
+just a lame jumping horse(unicorn??) game.
