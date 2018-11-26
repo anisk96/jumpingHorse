@@ -7,7 +7,7 @@ var clouds = []
 var enemies= []
 var chance = 3;
 var score = 0;
-var rock;
+var blueApple;
 var theme;
 var coin;
 var Enemies = [];
@@ -15,7 +15,7 @@ var coins = [];
 var Land_img, Background1, Land_img1, Background2;
 var Cloud;
 var button, button1;
-var rocks = []
+var blueApples = []
 function preload(){
  spriteSheet[0] = loadImage("https://image.ibb.co/hnpyYV/ice-horse.png");
  spriteSheet[1] = loadImage("https://image.ibb.co/fb5afA/ice-horse-run-06.png");
@@ -29,7 +29,7 @@ function preload(){
  Land_img = loadImage("https://image.ibb.co/fEdXvA/tile-fall-2.png");
  Background1 = loadImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDwkkGVU2zV31r9IST6Ah0X2dscppon438PZyfJjAfO1NZTOmb");
  Cloud = loadImage("https://image.ibb.co/iT0jQA/8i6o-A9x5-T.png");
- rock = loadImage("https://image.ibb.co/gEeiJV/8b1eb71d81e991476ed7607d73f61644.png");
+ blueApple = loadImage("https://image.ibb.co/gEeiJV/8b1eb71d81e991476ed7607d73f61644.png");
  coin = loadImage("https://image.ibb.co/jRAp0y/coin.png") ;
  Enemies[0] = loadImage("https://image.ibb.co/nPQwOV/Haunter-Shiny.png");
  Background2 = loadImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_dkePeR56d4VVoZGkdhssFrL9BnOegf1QplPzyRsbDatQFzW-" );
@@ -44,7 +44,7 @@ function setup(){
   sprit = new Sprite ();
   theme = new background_1();
   button = createButton("Restart").class("btn btn-primary");
-  button.position(width / 2 - 50, height - 50);
+  button.position(width / 2 - 50, height - height/3);
   button.mousePressed(restart);
   button.hide();
   for(var i = 0; i < chance; i++){
@@ -85,31 +85,31 @@ function draw(){
 
   fill("red")
   textAlign(CENTER) ;
-  textSize(20);
-  text("Score:"+score,width/2,20);
+  textSize(25);
+  text("Score:"+score,width-100,40);
   sprit.show()
   sprit.animate();
   if(frameCount%25==0){
 	  land.push(new Land());
   }
-  if(frameCount % 30==0){
+  if(frameCount % 10==0){
 	   coins.push(new Coin());
   }
   if(frameCount % 80==0){
-	   rocks.push(new Rock());
+	   blueApples.push(new BlueApple());
   }
-  for(var i = 0;i<rocks.length;i++){
-    rocks[i].show();
-    rocks[i].update();
+  for(var i = 0;i<blueApples.length;i++){
+    blueApples[i].show();
+    blueApples[i].update();
   }
-  for(var i = 0;i<rocks.length;i++){
-    if(rocks[i].x<-rocks[i].w){
-  	   rocks.splice(i,1);
+  for(var i = 0;i<blueApples.length;i++){
+    if(blueApples[i].x<-blueApples[i].w){
+  	   blueApples.splice(i,1);
     }
   }
-  for(var i = 0;i<rocks.length;i++){
-    if(collision(sprit,rocks[i]) ){
-    	   rocks.splice(i,1);
+  for(var i = 0;i<blueApples.length;i++){
+    if(collision(sprit,blueApples[i]) ){
+    	   blueApples.splice(i,1);
     	   score+=10;
        }
   }
@@ -206,8 +206,8 @@ function collision(a,b){
 
 function Land(){
  this.x = width;
- this.y = random(height/2-50,height-100);
- this.w = random(170,270);
+ this.y = random(height *1/4,height-20);
+ this.w = random(150,260);
  this.h = 50/2;
  this.dx = 20;
  this.img = Land_img;
@@ -232,7 +232,7 @@ function background_1(){
 
 function Clouds(){
  this.x = width;
-	 this.y = random(0,height);
+	 this.y = random(0,height * 2 / 3);
 	 this.w = 100;
 	 this.h = 70;
  this.dx = 15;
@@ -247,7 +247,7 @@ function Clouds(){
 
 function Coin(){
  this.x = width;
- this.y = random(0,height);
+ this.y = random(0,height-10);
  this.w = 40;
  this.h = 40;
  this.dx = 5;
@@ -260,12 +260,12 @@ function Coin(){
  }
 }
 
-function Rock(){
+function BlueApple(){
  this.x = width;
  this.y = random(height/2-100,height-100);
  this.w = 60;
  this.h = 60;
- this.img = rock;
+ this.img = blueApple;
  this.dx = 8;
  this.show = function(){
    image(this.img,this.x,this.y,this.w,this.h);
@@ -280,12 +280,12 @@ function game_over(){
  fill(0);
  rect(0,0,width,height);
  textAlign(CENTER);
- textSize(50);
+ textSize(85);
  fill("blue")
  text("Game Over",width/2,height/2);
- textSize(20);
- fill("red")
- text("Your Score:"+score,width/2,50);
+ textSize(35);
+ fill("white")
+ text("Your Score:"+score,width/2,height/4);
  button.show()
 }
 
@@ -306,8 +306,8 @@ function restart(){
  for(var i = 0;i<clouds.length ;i++){
     clouds.splice(i,5);
  }
- for(var i = 0;i<rocks.length;i++){
-    rocks.splice(i,5);
+ for(var i = 0;i<blueApples.length;i++){
+    blueApples.splice(i,5);
  }
  for(var i = 0;i<coins.length;i++){
     coins.splice(i,6);
