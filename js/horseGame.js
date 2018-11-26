@@ -70,7 +70,7 @@ function draw(){
   if(frameCount % 10==0){
 	   clouds.push(new Clouds());
   }
-  else if(frameCount % 155==0){
+  else if(frameCount % 85==0){
 	   enemies.push(new Enemy());
   }
 
