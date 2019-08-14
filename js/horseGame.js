@@ -2,19 +2,19 @@
 var spriteSheet = [];
 var jump = []
 console.log = () => {};
-var land = [];
-var clouds = []
-var enemies= []
-var chance = 3;
-var score = 0;
-var blueApple;
-var theme;
-var coin;
-var Enemies = [];
+var land = [];  //platform
+var clouds = [] //distractions
+var enemies= [] //life threatener
+var chance = 3; //number of lifes
+var score = 0;  //achievements
+var blueApple;  //rewards...10points
+var theme;  //background??
+var coin; //reward...10points
+var Enemies = []; //
 var coins = [];
-var Land_img, Background1, Land_img1, Background2;
+var Land_img, Background1, Background2;
 var Cloud;
-var button, button1;
+var button; 
 var blueApples = []
 function preload(){
  spriteSheet[0] = loadImage("https://image.ibb.co/hnpyYV/ice-horse.png");
@@ -26,22 +26,22 @@ function preload(){
  spriteSheet[6] = loadImage("https://image.ibb.co/bNJE7q/ice-horse-run-01.png");
  spriteSheet[7] = loadImage("https://image.ibb.co/dk6HSq/ice-horse-run-00.png");
  jump[4] = loadImage("https://image.ibb.co/kEa80A/ice-horse-jump-02.png");
- Land_img = loadImage("https://image.ibb.co/fEdXvA/tile-fall-2.png");
- Background1 = loadImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDwkkGVU2zV31r9IST6Ah0X2dscppon438PZyfJjAfO1NZTOmb");
- Cloud = loadImage("https://image.ibb.co/iT0jQA/8i6o-A9x5-T.png");
  blueApple = loadImage("https://image.ibb.co/gEeiJV/8b1eb71d81e991476ed7607d73f61644.png");
  coin = loadImage("https://image.ibb.co/jRAp0y/coin.png") ;
  Enemies[0] = loadImage("https://image.ibb.co/nPQwOV/Haunter-Shiny.png");
+ Land_img = loadImage("https://image.ibb.co/fEdXvA/tile-fall-2.png");
+ Background1 = loadImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDwkkGVU2zV31r9IST6Ah0X2dscppon438PZyfJjAfO1NZTOmb");
  Background2 = loadImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_dkePeR56d4VVoZGkdhssFrL9BnOegf1QplPzyRsbDatQFzW-" );
+ Cloud = loadImage("https://image.ibb.co/iT0jQA/8i6o-A9x5-T.png");
 }
 
-var sprit ;
+var sprite ;
 var life = []
 function setup(){
   var c = createCanvas(windowWidth,windowHeight);
   c.position(0,0);
   background(0);
-  sprit = new Sprite ();
+  sprite = new Sprite ();
   theme = new background_1();
   button = createButton("Restart").class("btn btn-primary");
   button.position(width / 2 - 50, height - height/3);
@@ -62,7 +62,7 @@ function setup(){
 
 function draw(){
   background(0);
-  frameRate(20);//speed
+  frameRate(20); //speed
   theme.show();
   for(var i =0;i< life.length-1;i++){
 	   life[i].show();
@@ -87,8 +87,8 @@ function draw(){
   textAlign(CENTER) ;
   textSize(25);
   text("Score:"+score,width-100,40);
-  sprit.show()
-  sprit.animate();
+  sprite.show()
+  sprite.animate();
   if(frameCount%25==0){
 	  land.push(new Land());
   }
@@ -108,7 +108,7 @@ function draw(){
     }
   }
   for(var i = 0;i<blueApples.length;i++){
-    if(collision(sprit,blueApples[i]) ){
+    if(collision(sprite,blueApples[i]) ){
     	   blueApples.splice(i,1);
     	   score+=10;
        }
@@ -119,7 +119,7 @@ function draw(){
 
   }
   for(var i = 0;i<coins.length;i++){
-  	 if(collision(sprit,coins[i])){
+  	 if(collision(sprite,coins[i])){
   		 coins.splice(i,1);
   		 score++;
      }
@@ -142,23 +142,23 @@ function draw(){
   for(var i = land.length-1;i>0;i--){
 	  land[i].show();
 	  land[i].update();
-	  if(collision(sprit,land[i])){
-		  sprit.y = land[i].y-land[i].h*4+10;
+	  if(collision(sprite,land[i])){
+		  sprite.y = land[i].y-land[i].h*4+10;
 	  }
 	  if(land[i].x<-land[i].w){
 		    land.splice(i,1);
 	  }
   }
   for(var j =0;j<life.length;j++){
-    if(sprit.y>height-95){
-      sprit.y =0;
+    if(sprite.y>height-95){
+      sprite.y =0;
       life.splice(j,1);
       chance -=1;
     }
   }
   for(var j =0;j<life.length;j++){
     for(var i = 0;i<enemies.length;i++){
-      if(collision(sprit,enemies[i])){
+      if(collision(sprite,enemies[i])){
 	       enemies.splice(i,1);
 	       life.splice(j,1);
 	       chance-=1;
@@ -313,7 +313,7 @@ function restart(){
     coins.splice(i,6);
  }
 
- sprit.y = 0;
+ sprite.y = 0;
  button.hide()
  score =0;
  chance = 3;
